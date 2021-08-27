@@ -1,12 +1,12 @@
 
 # This is a basic workflow to help you get started with Actions
 
-name: read build number
+name: create release
 
 on:
   push:
-    paths:
-      - 'BUILD'
+    tags:
+      - 'b*'
 
 jobs:
   read-build-number:
@@ -35,6 +35,5 @@ jobs:
         
       - uses: softprops/action-gh-release@v1
         with:
-          name: ${{ needs.read-build-number.outputs.build-number }}
           files: |
             BUILD
