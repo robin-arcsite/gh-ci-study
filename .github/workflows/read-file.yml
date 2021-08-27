@@ -6,7 +6,7 @@ name: read build number
 on:
   push:
     paths:
-      - ./BUILD
+      - 'BUILD'
 
 jobs:
   read-build-number:
