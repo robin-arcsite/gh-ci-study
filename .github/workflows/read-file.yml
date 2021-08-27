@@ -6,7 +6,7 @@ name: read build number
 on:
   push:
     branches:
-      - master
+      - main
     tags:
       - b*
 
