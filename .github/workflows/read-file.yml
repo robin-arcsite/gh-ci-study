@@ -5,10 +5,8 @@ name: read build number
 
 on:
   push:
-    branches:
-      - main
-    tags:
-      - b*
+    paths:
+      - ./BUILD
 
 jobs:
   read-build-number:
@@ -37,6 +35,6 @@ jobs:
         
       - uses: softprops/action-gh-release@v1
         with:
-          name: ${{ jobs.read-build-number.outputs.build-number }}
+          name: ${{ needs.read-build-number.outputs.build-number }}
           files: |
             BUILD
