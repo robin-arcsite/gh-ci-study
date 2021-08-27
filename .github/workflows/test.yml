@@ -17,6 +17,6 @@ jobs:
           ndk-version: r22b
           add-to-path: false
           
-      - run: echo "${NDK_ROOT}"
+      - run: ${NDK_ROOT}/ndk-build
         env:
           NDK_ROOT: ${{ steps.setup-ndk.outputs.ndk-path }}
