@@ -4,7 +4,11 @@
 name: read build number
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - master
+    tags:
+      - b*
 
 jobs:
   read-build-number:
@@ -19,5 +23,20 @@ jobs:
         id: read-build-number
         with:
           path: ./BUILD
-          
-      - run: echo ${{ steps.read-build-number.outputs.content }}
+    
+    outputs:
+      build-number: ${{ steps.read-build-number.outputs.content }}
+  
+  release:
+    needs: [read-build-number]
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+        
+      - uses: softprops/action-gh-release@v1
+        with:
+          name: ${{ jobs.read-build-number.outputs.build-number }}
+          files: |
+            BUILD
