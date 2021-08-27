@@ -7,10 +7,13 @@ on:
   workflow_dispatch:
 
 jobs:
-  install-ndk:
+  read-build-number:
     runs-on: windows-latest
 
     steps:
+      - name: checkout
+        uses: actions/checkout@v2
+        
       - name: read file
         uses: juliangruber/read-file-action@v1
         id: read-build-number
