@@ -9,12 +9,29 @@ on:
       - 'b*'
 
 jobs:
-  release:
-    runs-on: ubuntu-latest
-    
+  upload:
+    runs-on: macos-latest
+
     steps:
       - name: checkout
         uses: actions/checkout@v2
+
+      - name: upload app
+        uses: actions/upload-artifact@v2
+        with:
+          name: app-macos
+          path: sample-app-macos.app
+
+  release:
+    needs: [upload]
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: download app
+        uses: actions/download-artifact@v2
+        with:
+          name: app-macos
+          path: sample-app-macos.app
 
       - name: zip app bundle
         uses: montudor/action-zip@v1
