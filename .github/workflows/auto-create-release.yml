@@ -15,10 +15,15 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v2
+
+      - name: zip app bundle
+        uses: montudor/action-zip@v1
+        with:
+          args: zip -qq -r sample-app-macos.app.zip sample-app-macos.app
         
       - uses: softprops/action-gh-release@v1
         with:
           files: |
             BUILD
             VERSION
-            sample-app-macos.app
+            sample-app-macos.app.zip
