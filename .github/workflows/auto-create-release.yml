@@ -21,3 +21,4 @@ jobs:
           files: |
             BUILD
             VERSION
+            sample-app-macos.app
