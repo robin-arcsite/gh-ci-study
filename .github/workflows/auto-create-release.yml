@@ -9,22 +9,6 @@ on:
       - 'b*'
 
 jobs:
-  read-build-number:
-    runs-on: windows-latest
-
-    steps:
-      - name: checkout
-        uses: actions/checkout@v2
-        
-      - name: read file
-        uses: juliangruber/read-file-action@v1
-        id: read-build-number
-        with:
-          path: ./BUILD
-    
-    outputs:
-      build-number: ${{ steps.read-build-number.outputs.content }}
-  
   release:
     needs: [read-build-number]
     runs-on: ubuntu-latest
@@ -37,3 +21,4 @@ jobs:
         with:
           files: |
             BUILD
+            VERSION
